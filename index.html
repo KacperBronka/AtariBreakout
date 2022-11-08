@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="main.css" />
+    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon" />
+    <script src="p5.js" defer></script>
+    <title>SemiGodProgrammer • Atari Breakout</title>
+  </head>
+  <body>
+    <header>Atari Breakout</header>
+    <main>
+      <a href="game.html" class="online">Play online</a>
+      <a href="SemiGodProgrammerBreakOut.zip" download="" class="exe">Download .exe file</a>
+    </main>
+    <script>
+      let ballX;
+      let ballY;
+      let ballSpeedX;
+      let ballSpeedY = 5;
+      function setup() {
+        let canvas = createCanvas(windowWidth, windowHeight - 200);
+        canvas.parent(document.querySelector("main"));
+
+        ballX = windowWidth / 2;
+        ballY = windowHeight / 2 + 50;
+
+        if (Math.random() <= 0.5) {
+          ballSpeedX = -4;
+        } else {
+          ballSpeedX = 4;
+        }
+      }
+      function draw() {
+        background(39);
+        noStroke();
+        fill(170);
+        rectMode(CENTER);
+        //checking for ball-ceiling collision
+        if (ballY <= 15 || ballY >= windowHeight - 215) {
+          ballSpeedY *= -1;
+        }
+
+        //checking for ball-wall collision
+        if (ballX <= 15 || ballX >= width - 15) {
+          ballSpeedX *= -1;
+        }
+        //drawing ball
+        circle(ballX, ballY, 30);
+        ballX += ballSpeedX;
+        ballY += ballSpeedY;
+      }
+      let interval = setInterval(() => {
+        window.scrollTo(0, 0);
+      }, 10);
+      setTimeout(() => {
+        clearInterval(interval);
+      }, 1000);
+    </script>
+  </body>
+</html>
