@@ -1,5 +1,4 @@
 let system;
-
 let points = 0;
 
 let rectX;
@@ -27,6 +26,7 @@ let colors = ["#007a7a", "#008b8b", "#00a1a1", "#00d6d6", "cyan"];
 let activeBlocks = 0;
 
 let started = false;
+let gameEnded = false;
 
 function setup() {
   system = new ParticleSystem(createVector(width / 2, 50));
@@ -106,8 +106,9 @@ function draw() {
 
   document.querySelector(".points").innerText = points;
 
-  if (activeBlocks == 0) {
+  if (activeBlocks == 0 && !gameEnded) {
     end();
+    gameEnded = true;
   }
 
   //drawing ball
@@ -133,7 +134,8 @@ function draw() {
     ballSpeedX *= -1;
   }
 
-  if (ballY >= windowHeight) {
+  if (ballY >= windowHeight && !gameEnded) {
+    gameEnded = true;
     document.querySelector(".win span").innerText = "You Lost";
     end();
   }
