@@ -62,6 +62,21 @@ body {
   z-index: 999999;
   animation: blink 2s linear infinite;
 }
+.score,
+.highscore {
+  font-size: 0.9em;
+  display: flex;
+  gap: 5px;
+  color: grey;
+}
+.scores {
+  position: absolute;
+  top: 20%;
+  left: 30%;
+  width: 40%;
+  display: flex;
+  justify-content: space-between;
+}
 @keyframes blink {
   0%,
   100% {

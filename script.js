@@ -136,7 +136,7 @@ function draw() {
 
   if (ballY >= windowHeight && !gameEnded) {
     gameEnded = true;
-    document.querySelector(".win span").innerText = "You Lost";
+    document.querySelector(".win #winState").innerText = "You Lost";
     end();
   }
 
@@ -154,6 +154,17 @@ function draw() {
 
 const end = () => {
   document.querySelector(".win").classList.add("active");
+  let destroyedBlocks = 0;
+  blocks.forEach((block) => {
+    if (block[2] == false) {
+      destroyedBlocks++;
+    }
+  });
+  document.querySelector("#valueS").innerText = destroyedBlocks;
+  if (localStorage.getItem("highscore") == null || parseInt(localStorage.getItem("highscore")) < destroyedBlocks) {
+    localStorage.setItem("highscore", destroyedBlocks);
+  }
+  document.querySelector("#valueH").innerText = localStorage.getItem("highscore");
 };
 document.querySelector(".win button").addEventListener("click", () => {
   document.location.reload(false);
